@@ -7,8 +7,6 @@ import com.pi4j.Pi4J
 import com.pi4j.io.gpio.digital.DigitalOutput
 import com.pi4j.io.gpio.digital.DigitalState
 
-
-
 @RestController
 @RequestMapping("/led")
 class LedController {
@@ -18,6 +16,7 @@ class LedController {
     private val led = pi4j.create(DigitalOutput.newConfigBuilder(pi4j)
     .address(18)
     .id("led")
+    .provider("gpiod-digital-output")
     .shutdown(DigitalState.LOW)
     .initial(DigitalState.LOW)
     .build())
@@ -25,6 +24,7 @@ class LedController {
 
     @GetMapping("/on")
     fun on(): String {
+        println(">>> Recebido comando para LIGAR o led")
         led.high().let { "Ligado" }
         return "Comando de ligar recebido!"
     }
@@ -32,6 +32,7 @@ class LedController {
 
     @GetMapping("/off")
     fun off(): String {
+        println(">>> Recebido comando para DESLIGAR o led")
         led.low().let { "Desligado" }
         return "Comando de desligar recebido!"
     }

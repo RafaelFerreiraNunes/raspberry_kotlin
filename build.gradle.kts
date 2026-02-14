@@ -23,12 +23,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webmvc")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("tools.jackson.module:jackson-module-kotlin")
-	implementation("com.pi4j:pi4j-core:2.4.0")
-	implementation("com.pi4j:pi4j-plugin-raspberrypi:2.4.0")
-	implementation("com.pi4j:pi4j-plugin-pigpio:2.4.0")
+	implementation("com.pi4j:pi4j-core:3.0.3")
+	implementation("com.pi4j:pi4j-plugin-raspberrypi:3.0.3")
+	implementation("com.pi4j:pi4j-plugin-gpiod:3.0.3")
 	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher") 
 }
 
 kotlin {
