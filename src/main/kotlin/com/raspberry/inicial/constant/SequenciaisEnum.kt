@@ -1,4 +1,4 @@
-package com.raspberry.inicial.constants
+package com.raspberry.inicial.constant
 
 enum class SequencialEnum(val sequencial: String) {
     SIMPLES("simples"),

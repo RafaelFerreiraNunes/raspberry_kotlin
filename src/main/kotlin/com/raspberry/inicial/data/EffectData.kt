@@ -1,6 +1,6 @@
 package com.raspberry.inicial.data
 
-import com.raspberry.inicial.constants.SequencialEnum
+import com.raspberry.inicial.constant.SequencialEnum
 import org.springframework.stereotype.Component
 
 @Component
