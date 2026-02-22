@@ -8,7 +8,7 @@ enum class SequencialEnum(val sequencial: String) {
 
     companion object {
         fun getSequencial(valor: String): SequencialEnum? {
-            return entries.find { it.name == valor }
+            return entries.find { it.sequencial == valor }
         }
     }
 }

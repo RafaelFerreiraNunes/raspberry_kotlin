@@ -52,7 +52,7 @@ class LedManager(private val effectData: EffectData) {
                             }
                             led++
                         }
-                        sleep(1000)
+                        sleep(400)
                     }
                     if (efeito != efeitoAtual) return@launch
                 } else {

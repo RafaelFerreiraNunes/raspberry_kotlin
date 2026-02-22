@@ -14,7 +14,12 @@ class LedController(private val ledManager: LedManager) {
 
     @GetMapping("/{type}")
     fun sequencial(@PathVariable type: String, effect: EffectData): String {
+
+        println("$type")
+
         val effectEnum = SequencialEnum.getSequencial(type)
+
+        println("$effectEnum")
 
         ledManager.mudarEfeito(effectEnum)
 
