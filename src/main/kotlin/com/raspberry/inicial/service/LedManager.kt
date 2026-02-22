@@ -11,10 +11,10 @@ import jakarta.annotation.PostConstruct
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.springframework.stereotype.Service
-import java.lang.Thread.sleep
 
 @Service
 class LedManager(private val effectData: EffectData) {
@@ -40,6 +40,7 @@ class LedManager(private val effectData: EffectData) {
                 if (efeito != null) {
                     val matrix = effectData.efeitos[efeito]
                     matrix?.forEach { line ->
+                        if (efeito != efeitoAtual) return@forEach
                         var led = 1
                         line.forEach { pin ->
                             when (led) {
@@ -52,9 +53,8 @@ class LedManager(private val effectData: EffectData) {
                             }
                             led++
                         }
-                        sleep(400)
+                        delay(400)
                     }
-                    if (efeito != efeitoAtual) return@launch
                 } else {
                     actionLed(led1, false)
                     actionLed(led2, false)
