@@ -7,6 +7,7 @@ import com.raspberry.inicial.data.EffectData
 import com.raspberry.inicial.factory.ledFactory
 import com.raspberry.inicial.factory.ledFactoryApply
 import com.raspberry.inicial.factory.ledFactoryLet
+import com.raspberry.inicial.strategy.EffectStrategy
 import jakarta.annotation.PostConstruct
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +18,10 @@ import kotlinx.coroutines.launch
 import org.springframework.stereotype.Service
 
 @Service
-class LedManager(private val effectData: EffectData) {
+class LedManager(
+    private val effectData: EffectData,
+    private val effects: Map<String, EffectStrategy>
+) {
 
     private val pi4j = Pi4J.newAutoContext()
 
@@ -38,7 +42,8 @@ class LedManager(private val effectData: EffectData) {
             while (isActive) {
                 val efeito = efeitoAtual
                 if (efeito != null) {
-                    val matrix = effectData.efeitos[efeito]
+                    val efeitoSelecionado = effects.getValue(efeito.sequencial)
+                    val matrix = efeitoSelecionado.generateEffect()
                     matrix?.forEach { line ->
                         if (efeito != efeitoAtual) return@forEach
                         var led = 1

@@ -1,16 +1,20 @@
 package com.raspberry.inicial.controller
 
+import com.raspberry.inicial.annotation.Strategy
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import com.raspberry.inicial.service.LedManager
 import com.raspberry.inicial.constant.SequencialEnum
 import com.raspberry.inicial.data.EffectData
+import com.raspberry.inicial.strategy.EffectStrategy
 import org.springframework.web.bind.annotation.PathVariable
 
 @RestController
 @RequestMapping("/led")
-class LedController(private val ledManager: LedManager) {
+class LedController(
+    private val ledManager: LedManager
+    ) {
 
     @GetMapping("/{type}")
     fun sequencial(@PathVariable type: String, effect: EffectData): String {
