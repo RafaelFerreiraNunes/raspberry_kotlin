@@ -9,9 +9,11 @@ import com.raspberry.inicial.factory.ledFactoryApply
 import com.raspberry.inicial.factory.ledFactoryLet
 import com.raspberry.inicial.strategy.EffectStrategy
 import jakarta.annotation.PostConstruct
+import jakarta.annotation.PreDestroy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -61,19 +63,32 @@ class LedManager(
                         delay(400)
                     }
                 } else {
-                    actionLed(led1, false)
-                    actionLed(led2, false)
-                    actionLed(led3, false)
-                    actionLed(led4, false)
-                    actionLed(led5, false)
-                    actionLed(led6, false)
+                    desligarTodos()
                 }
             }
         }
     }
 
+    @PreDestroy
+    fun desligarHardware(){
+        desligarTodos()
+        if (!pi4j.isShutdown){
+            pi4j.shutdown()
+        }
+        scope.cancel()
+    }
+
     fun mudarEfeito(novoEfeito: SequencialEnum?) {
         this.efeitoAtual = novoEfeito
+    }
+
+    private fun desligarTodos(){
+        actionLed(led1, false)
+        actionLed(led2, false)
+        actionLed(led3, false)
+        actionLed(led4, false)
+        actionLed(led5, false)
+        actionLed(led6, false)
     }
 }
 
